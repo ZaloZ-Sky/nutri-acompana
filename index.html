@@ -56,6 +56,8 @@ nav.links a{color:var(--ink);text-decoration:none;font-weight:500;font-size:15px
 nav.links a:hover{color:var(--green-ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-size:16px;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:var(--body)}
 .btn-main{background:var(--green);color:#fff}
+.btn-order{background:#fff;color:#13202A;font-size:17px;padding:14px 26px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.btn-order:hover{transform:translateY(-1px)}
 :root[data-theme="dark"] .btn-main{color:#13202A}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn-main{color:#13202A}}
 .btn-main:hover{filter:brightness(1.07)}
@@ -474,7 +476,8 @@ nav.links a[aria-current="page"]{color:var(--green-ink);text-decoration:underlin
         <div style="display:grid;gap:14px;align-content:start">
           <p class="eyebrow" style="color:inherit;opacity:.85">Contacto</p>
           <h2>Pide tu semana de prueba</h2>
-          <p>Escríbenos con la comuna de tu papá o tu mamá y te contamos cómo empezar. El servicio parte en enero de 2027.</p>
+          <p>Completa el formulario de pedido con la comuna de tu papá o tu mamá y te contamos cómo empezar. El servicio parte en enero de 2027.</p>
+          <a class="btn btn-order" href="https://nutriacompana.whataform.com/f/7db60cbd8d21ba" target="_blank" rel="noopener" style="justify-self:start">Hacer mi pedido →</a>
         </div>
         <div class="channels" id="channels"></div>
       </div>
@@ -496,6 +499,7 @@ nav.links a[aria-current="page"]{color:var(--green-ink);text-decoration:underlin
 <script>
 // Canales de contacto: completar cuando se creen las cuentas. Vacío = "Muy pronto".
 const CONTACTO = {
+  pedido:    { label: "Pedidos",   value: "Formulario de pedido", url: "https://nutriacompana.whataform.com/f/7db60cbd8d21ba", copy: "https://nutriacompana.whataform.com/f/7db60cbd8d21ba" },
   whatsapp:  { label: "WhatsApp",  value: "", url: "" },
   instagram: { label: "Instagram", value: "", url: "" },
   facebook:  { label: "Facebook",  value: "", url: "" },
@@ -516,7 +520,7 @@ const CONTACTO = {
       const b = document.createElement("button"); b.className = "copy"; b.type = "button"; b.textContent = "Copiar";
       b.addEventListener("click", function(){
         const done = function(){ b.textContent = "Copiado"; setTimeout(function(){ b.textContent = "Copiar"; }, 1600); };
-        try { navigator.clipboard.writeText(c.value).then(done, function(){ selectText(v); }); } catch(e){ selectText(v); }
+        try { navigator.clipboard.writeText(c.copy || c.value).then(done, function(){ selectText(v); }); } catch(e){ selectText(v); }
       });
       row.append(b);
     }
